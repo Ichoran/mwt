@@ -1,0 +1,1 @@
+"This file exists to make sure new repositories have a target lib directory." 
