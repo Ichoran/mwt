@@ -6,9 +6,9 @@
 
 The authors of the Multi-Worm Tracker do all of their C++ code development under Linux.  The recommended way to compile the MWT.dll file is to cross-compile on Linux.  It is also possible to compile under windows, as follows:
 
-* Install MinGW
-* Set the path for MinGW
-* Run make
+* Install MinGW (do once)
+* Set the path for MinGW (do every time you open a command window)
+* Run make (every time you want to create a new MWT.dll)
 
 ### Installing MinGW
 
@@ -28,7 +28,7 @@ Then, under the **Installation** menu (top left) select "Apply"; a window will p
 If all goes correctly, you should be able to type
 
 ```
-c:\MinGW\bin\mingw32-c++
+C:\MinGW\bin\mingw32-c++
 ```
 
 into a command prompt and get back
@@ -38,21 +38,49 @@ Mingw32-c++: fatal error: no input files
 compilation terminated.
 ```
 
+If this doesn't work, perhaps MinGW didn't get installed in the default location--replace `C:\MinGW` with the correct path.
+
 ### Setting the MinGW path
 
-### Compiling the MWT
-
-By default, MinGW does _not_ set up the path properly 
-
-First, you must make sure the makefile points to where your installation of MinGW is.  In the file `makefile` in the `src` directory of the MWT project, check that the line starting `CC = ` points to your copy of `mingw32-g++`.
-
-You can probably find it at `C:\MinGW\bin\mingw32-g++` (an easy way to make sure the path is correct is to grab the file and drop it into a command prompt).  If your copy isn't where `CC` says it is, edit the `CC` line and save the file.  (Do not use Notepad; it doesn't understand Unix line endings.  You might need to install a slightly more capable editor like Notepad++ or Sublime Text.)
-
-Then open the command prompt and traverse to the src directory for the MWT project.  (It's usually easiest to type `cd ` and then drag the src folder from Windows Explorer into the command prompt window.)
-
-Finally, assuming that MinGW was installed at `C:\MinGW`, enter
+Open a command window that you will use to compile the MWT.  Enter
 
 ```
-C:\MinGW\bin\mingw32-make
+set PATH=%PATH%;C:\MinGW\bin
 ```
 
+(assuming that MinGW was installed in the default location--drag the correct `bin` directory after the `;` if it was installed somewhere else).
+
+To test that this worked, try typing `mingw32-c++`.  It should give you the same fatal error message as the one above.
+
+You'll need to do this every time you open a new command window--MinGW does not set the system path itself, so it's effectively unusable unless this is done.
+
+### Compiling the MWT with make
+
+Once you have set the path, src directory for the MWT project.  (It's usually easiest to type `cd ` and then drag the src folder from Windows Explorer into the command prompt window.)
+
+Enter
+
+```
+mingw32-make DLL
+```
+
+(DLL must be in all caps).
+
+You should see a bunch of lines like
+
+```
+C:\MinGW\bin\mingw32-g++ -Wall -O2 -fno-strict-aliasing -ggdb3 -shared -DUNIT_TEST_OWNER -DWINDOWS  -o unit_geometry MWT_Geometry.cc
+```
+
+and possibly some warning messages talking about `[-Wreorder]`.
+
+You should see a newly created (or re-created) file in the `lib` directory, `MWT.dll`.
+
+It is recommended that you copy this file somewhere else before you tell the LabView VIs where to find it, so you are less likely to accidentally create a new MWT.dll over the one that the MWT (if running) is already using.  This generally does not work well.
+
+That's it!
+
+----
+
+This this document is copyright (c) Rex Kerr and HHMI Janelia, 2015.
+It is distributed under [CC-BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), the Creative Commons 4.0 Attribution-ShareAlike license.
