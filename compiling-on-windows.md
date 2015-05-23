@@ -7,7 +7,7 @@
 The authors of the Multi-Worm Tracker do all of their C++ code development under Linux.  The recommended way to compile the MWT.dll file is to cross-compile on Linux.  It is also possible to compile under windows, as follows:
 
 * Install MinGW (do once)
-* Set the path for MinGW (do every time you open a command window)
+* Set the path for MinGW (do once)
 * Run make (every time you want to create a new MWT.dll)
 
 ### Installing MinGW
@@ -42,17 +42,35 @@ If this doesn't work, perhaps MinGW didn't get installed in the default location
 
 ### Setting the MinGW path
 
-Open a command window that you will use to compile the MWT.  Enter
+To compile the MWT with LabView, you will need LabView to be able to find the MinGW DLL files, as well as for the MinGW tools to be able to find each other.  The easiest way to do this is to add `C:\MinGW\bin` path to the system path (use wherever MinGW is actually installed if not `C:\MinGW`).
+
+**Be careful with this step.  Destroying the path information is a quick way to make your computer hard/impossible to use.**
+
+To do this, open the Control Panel (Windows key, then select from menu).  In the top right corner there's a search box; enter `path`.  It should find one thing with three subheadings:
 
 ```
-set PATH=%PATH%;C:\MinGW\bin
+System
+Edit environment variables for your account
+Edit the system environment variables
 ```
 
-(assuming that MinGW was installed in the default location--drag the correct `bin` directory after the `;` if it was installed somewhere else).
+Click on the middle of these and you should get a window called "Environment Variables".  In the bottom half of the window, under "System variables", find the line that starts with `Path` on the left.  Click `Edit...`.  It will pop up a window called "Edit System Variable".  It starts out highlighting the whole set of paths under "Variable value", as if maybe you want to delete it.
 
-To test that this worked, try typing `mingw32-c++`.  It should give you the same fatal error message as the one above.
+_Don't delete the existing path!_  If you mess it up, just hit `Cancel` and try again.
 
-You'll need to do this every time you open a new command window--MinGW does not set the system path itself, so it's effectively unusable unless this is done.
+_Don't_ just start typing.
+
+_Do_ click at the very end of the line; maybe you'll need to use the arrow keys to get all the way there.  Type in
+
+```
+;C:\MinGW\bin
+```
+
+at the end of the line, after everything else.  Include the semicolon, `;`.  (Be sure you're really at the end and not inserting this into the middle of some other path.)  Don't make any other changes.  Click `OK` and the path is saved.
+
+Did you mess up?  Actually, the path is _not_ saved yet!  You also need to click `OK` on the Environment Variables window before it's really saved.  If you made a mistake, cancel that window.  Otherwise, click `OK`.  Now it's _really_ saved.
+
+To test that this worked, open a new command window and enter `mingw32-c++`.  It should give you the same fatal error message as the one you got when testing that MinGW was installed.
 
 ### Compiling the MWT with make
 
@@ -78,7 +96,14 @@ You should see a newly created (or re-created) file in the `lib` directory, `MWT
 
 It is recommended that you copy this file somewhere else before you tell the LabView VIs where to find it, so you are less likely to accidentally create a new MWT.dll over the one that the MWT (if running) is already using.  This generally does not work well.
 
-That's it!
+
+## Compiling the MWT with LabVIEW 2014
+
+_Note: this entire section is tentative and untested at this point._
+
+(Something about loading `MultiWormTracker.lvproj`.)
+
+(Something about making sure you have the Vision Development Module.)
 
 ----
 
