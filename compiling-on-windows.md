@@ -101,9 +101,24 @@ It is recommended that you copy this file somewhere else before you tell the Lab
 
 _Note: this entire section is tentative and untested at this point._
 
+### Setting up LabVIEW 2014
+
+The MWT makes use of LabVIEW to handle hardware interfacing.  The following components are needed to modify the hardware- and user-interfacing parts of the MWT:
+
+1. LabVIEW [Full Development System](http://sine.ni.com/nips/cds/view/p/lang/en/nid/212666) ([Professional](http://sine.ni.com/nips/cds/view/p/lang/en/nid/212669) required to deploy to other machines)
+2. LabVIEW [Vision Acquisition Software](http://sine.ni.com/nips/cds/view/p/lang/en/nid/12892)
+3. LabVIEW [Vision Development Module](http://sine.ni.com/nips/cds/view/p/lang/en/nid/209860)
+
+LabVIEW and the Vision Development Module are expensive.  We apologize.  LabVIEW does a lot of work to make sure hardware "just works", so you're getting good value there.  The Vision Development Module provides a handful of essential but not-very-impressive capabilities for the MWT, and ought to be able to be engineered out.  Nobody's
+had time yet.
+
+### Running the MWT project in LabVIEW
+
 (Something about loading `MultiWormTracker.lvproj`.)
 
 (Something about making sure you have the Vision Development Module.)
+
+### Building the MWT project for deployment on other machines
 
 ----
 
