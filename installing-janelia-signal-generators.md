@@ -12,7 +12,8 @@ ASRL3::INSTR "COM3"
 
 If you click on it, the right panel will tell you that the port description is "Teensy USB Serial".
 
-The baud rate will probably be wrong (9600).  At the bottom of that panel are some easily overlooked tabs; "Settings" is selected by default.  Click on "Port settings" and change "Baud rate" to 115200.  Everything else should be okay.  (8 data bits, "None" for parity, 1 stop bit, "None" for flow control.)
+You'll need to select this channel from within the MWT (i.e. `COM3` if that's where it is) to use the stimulator.
 
-There's another easy-to-overlook button at the top: `Save`.  Click it.  Now go back to the "Settings" tab; it should reflect the change you made.
+## Waveform generator (based on Arduino Pro Mini with )
 
+Follow the same procedure as with the pulse generator, but look for "USB Serial Port".  The name is generic, but you can identify it by refreshing the list and watching for which new port appears.
